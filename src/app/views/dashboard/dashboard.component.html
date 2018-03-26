@@ -1,0 +1,70 @@
+<div class="container">
+
+  <!-- Static navbar -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      
+    </div><!--/.container-fluid -->
+  </nav>
+
+  <!-- Main component for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="user-container">
+        <div *ngIf="!authService.isLoggedIn()">
+            <a class="btn btn-lg btn-primary" href="" role="button" (click)="authService.logout()">Login</a>
+        </div>
+          <div class="logout-container" *ngIf="authService.isLoggedIn()">
+            <button class="btn btn-lg btn-primary" role="button" (click)="authService.logout()">Logout</button>
+          </div>
+    </div>
+    <div class="jumbo-message">
+        <h1>Welcome To The Monkey Swag Catalog</h1>
+        <p>Every product sold helps a primate eat.</p>
+    </div>
+    
+    <div class="cart-wrapper">
+    <h4>{{cart.length}} Items Selected <small *ngIf="cart.length > 0" (click)="showCart = !showCart" style="color:lime;cursor: pointer">[show items]</small></h4>
+    <div class="cart-container" *ngIf="showCart">
+      <div class="cart-item" *ngFor="let item of cart">
+        <h4>{{item.ProductName}} | {{item.ProductPrice | currency}}</h4>
+        
+      </div>
+     
+    </div>
+    <p>Total: {{cartPrice | currency}}</p>
+  </div>
+  <div class="clearfix"></div>
+  </div>
+<div class="product-container">
+  <div class="product" *ngFor="let product of viewProducts">
+   <h4>{{product.ProductName}}</h4> 
+   <div class="img-wrapper">
+     <div class="img-inner">
+        <img class="product-img" [src]="product.PhotoSrc">
+     </div>
+    
+   </div>
+   
+    <h3 class="product-repeat-price">{{product.ProductPrice | currency}}</h3>
+    <div class="color-select">
+      <div><p>Choose A Color:</p>
+               
+      <select class="product-color" [(ngModel)]="product.SelectedColor" (change)="colorChange(product)">
+          <option *ngFor="let color of product.Colors; let i = index" [value]="color" [selected]="color == i">{{color}}</option>
+        </select>
+      </div>
+      <div class="swatches">
+        <div class="swatches-inner">
+            <div class="swatch" [ngClass]="swatch" *ngFor="let swatch of product.Colors"></div>
+        </div>
+          
+          <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="btn-container">
+      <p *ngIf="!product.SelectedColor" class="help-text">SELECT A COLOR</p>
+      <button class="add-cart" [disabled]="!product.SelectedColor" (click)="addToCart(product)">Add To Cart</button>
+    </div>
+  </div>
+</div>
+</div> <!-- /container -->

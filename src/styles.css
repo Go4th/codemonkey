@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis|Khand');
+div, p, span {
+    font-family: 'Dosis', sans-serif;
+}
+h3, h4, h5, button {
+    font-family: 'Khand', sans-serif;
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+/* p, h1, h2, h3, h4, h5, h6, span, div, button {
+    font-family:  Arial, sans-serif
+    
+} */
+body {
+    background: #333;
+}
+.header-inner {
+    width: 960px;
+    margin: auto;
+    text-align: center;
+}
+
+img.logo {
+    width: 200px;
+    margin: 20px;
+}
+.body {
+    width: 960px;
+    margin: auto;
+}
